@@ -12,9 +12,15 @@
             <tr v-for="(word,i) in words" :key ="i">
                 <td>{{ word.english }}</td>
                 <td>{{ word.german }}</td>
-                <td width="75" class="center aligned">Show</td>
-                <td width="75" class="center aligned">Edit</td>
-                <td width="75" class="center aligned">Destroy</td>
+                <td width="75" class="center aligned">
+                    <router-link :to="{name: 'show',params: {id: word._id}}">Show</router-link>
+                </td>
+                <td width="75" class="center aligned">
+                    <router-link :to="{name: 'edit',params: {id: word._id}}">Edit</router-link>
+                </td>
+                <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
+                    <a href="`/words/${word._id}">Delete</a>
+                </td>
             </tr>
         </table>
     </div>
@@ -29,6 +35,17 @@
             return {
                 words: []
             };
+        },
+
+        methods: {
+            async onDestroy(id) {
+                const sure = window.confirm('Are you sure?');
+                if(!sure) return;
+                await api.deleteWord(id);
+                this.flash('Word deleted successfully','success');
+                const newWords = this.words.filter(word => word._id !== id);
+                this.words = newWords;
+            }
         },
 
         async mounted() {
