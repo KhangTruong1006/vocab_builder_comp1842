@@ -4,23 +4,29 @@
         <table id="id" class="ui celled compact table">
             <thead>
                 <tr>
-                    <th>English</th>
-                    <th>German</th>
+                    <th>  
+                        <i class="united kingdom flag"></i> English
+                    </th>
+                    <th>  
+                        <i class="germany flag"></i> German
+                    </th>
+                    <th>  
+                        <i class="vietnam flag"></i> Vietnamese
+                    </th>
                     <th colspan="3"></th>
                 </tr>
             </thead>
             <tr v-for="(word,i) in words" :key ="i">
                 <td>{{ word.english }}</td>
                 <td>{{ word.german }}</td>
-                <td width="75" class="center aligned">
-                    <router-link :to="{name: 'show',params: {id: word._id}}">Show</router-link>
-                </td>
+                <td>{{ word.vietnamese }}</td>
                 <td width="75" class="center aligned">
                     <router-link :to="{name: 'edit',params: {id: word._id}}">Edit</router-link>
                 </td>
-                <td width="75" class="center aligned" @click.prevent="onDestroy(word._id)">
-                    <a href="`/words/${word._id}">Delete</a>
+                <td width="75" class="center aligned ">
+                    <button type="button" class="btn btn-danger"  @click.prevent="onDestroy(word._id)" href="`/words/${word._id}">Delete</button>
                 </td>
+
             </tr>
         </table>
     </div>
