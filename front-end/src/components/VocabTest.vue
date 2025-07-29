@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="shadow p-3 mb-5 bg-white rounded">
     <h2>Score: {{ score }} out of {{ words.length }}</h2>
 
     <form action="#" @submit.prevent="onSubmit">
@@ -32,9 +32,16 @@
         />
       </div>
 
-      <button class="positive ui button" :disabled="testOver">
+      <div class="row pl-3">
+        <button class="positive ui button" v-if="!testOver">
         Submit
       </button>
+      <a v-if="testOver" class="positive ui button" href="/words">
+        Finish
+      </a>
+      </div>
+      
+      
     </form>
 
     <p :class="['results', resultClass]">
@@ -44,6 +51,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'vocab-test',
   props: {

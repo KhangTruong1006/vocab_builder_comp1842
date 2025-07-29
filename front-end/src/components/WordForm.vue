@@ -1,5 +1,5 @@
 <template>
-    <form action="#" @submit.prevent="onSubmit">
+    <form action="#" @submit.prevent="onSubmit" class="shadow-lg p-3 mt-4">
         <p v-if="errorsPresent" class="error">Please fill out both fields!</p>
     
         <div class="ui labeled input fluid">
@@ -22,8 +22,10 @@
             </div>
             <input type="text" placeholder="Enter word..." v-model="word.vietnamese" />
         </div>
-    
-        <button class="positive ui button">Submit</button>
+        
+        <div class="d-flex justify-content-center">
+            <button class="positive ui button">Save</button>
+        </div> 
     </form>
  </template>
  
@@ -61,6 +63,14 @@
  </script>
  
  <style scoped>
+ button{
+    width: 50%;
+ }
+
+  form{
+    border-radius: 5px;
+    border-width: 2px;
+  }
  .error {
    color: red;
  }

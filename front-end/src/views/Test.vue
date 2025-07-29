@@ -1,17 +1,17 @@
 <template>
   <div>
-    <h1>Test</h1>
+    <h1 class="text-center display-3">Test</h1>
 
     <div v-if="words.length < 5">
       <p>You need to enter at least five words to begin the test</p>
     </div>
     <div v-else>
       <div v-if="!isStarted">
-        <h2>Select Language</h2>
-        <form @submit.prevent="onSubmit">
+        <form @submit.prevent="onSubmit" class="shadow-lg">
+          <h2 class="text-center">Select Language</h2>
           <div class="row">
             <div class="col">
-              <p class="bold">First Language</p>
+              <p class="bold text-center">First Language</p>
               <select id="first_language" v-model="firstLanguage">
                 <option
                   v-for="option in options"
@@ -19,13 +19,15 @@
                   :value="option.value"
                 >
                   <i :class="option.flag">
+                    <span>
                       {{ option.name }}
+                    </span>
                   </i> 
                 </option>
               </select>
             </div>
             <div class="col">
-              <p class="bold">Second Language</p>
+              <p class="bold text-center">Second Language</p>
               <select id="second_language" v-model="secondLanguage">
                 <option
                   v-for="option in options"
@@ -34,15 +36,16 @@
                   :disabled="option.value === firstLanguage"
                 >
                 <i :class="option.flag">
-                    {{ option.name }} {{ option.value === firstLanguage ? '(in use)' : '' }}
+                    {{ option.name }} {{ option.value === firstLanguage ? '(already chosen)' : '' }}
                 </i>
                 </option>
               </select>
             </div>
           </div>
           <br />
-          <p v-if="errorMsg" class="text-danger">{{ errorMsg }}</p>
-          <button class="btn btn-success">Start</button>
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-success btn-lg bold">Start</button>
+          </div>
         </form>
       </div>
 
@@ -70,7 +73,6 @@ export default {
     return {
       words: [],
       isStarted: false,
-      errorMsg: '',
       firstLanguage: 'english',
       secondLanguage: 'german',
       options: [
@@ -83,10 +85,9 @@ export default {
   methods: {
     onSubmit() {
       if (this.firstLanguage === this.secondLanguage) {
-        this.errorMsg = 'Please choose two different languages.';
+        this.flash('Sorry, choose another language','error');
         return;
       }
-      this.errorMsg = '';
       this.isStarted = true;
     },
   },
@@ -97,22 +98,43 @@ export default {
 </script>
 
 <style scoped>
+  button {
+    width: 50%;
+  }
+
+  form {
+    border-width: 2.5px;
+    border-radius: 5px;
+    margin: 30px;
+    padding:10px;
+  }
+  
   select,
   ::picker(select){
     appearance: base-select;
   }
-select {
-  width: 100%;
-  padding: 5px;
-  margin-bottom: 10px;
-}
-.bold {
-  font-weight: bold;
-}
-.text-danger {
-  color: red;
-}
+
+  select {
+    width: 100%;
+    height: 35px;
+    border-radius: 5px;
+  }
+
+  option{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+
+  option{
+    padding-block: 1rem;
+  }
+  
   option::checkmark{
     display: none;
+  }
+
+  option:checked{
+    background: #eee
   }
 </style>

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>New Word</h1>
+        <h1 class="display-4">New Word</h1>
         <word-form @createOrUpdate="createOrUpdate"></word-form>
     </div>
 </template>

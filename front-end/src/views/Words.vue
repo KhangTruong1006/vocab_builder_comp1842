@@ -1,7 +1,7 @@
 <template>
     <div>
-        <h1>Words</h1>
-        <table id="id" class="ui celled compact table">
+        <h1 class="display-4">Words</h1>
+        <table id="id" class="table table-striped table-bordered">
             <thead>
                 <tr>
                     <th>  
@@ -16,21 +16,22 @@
                     <th colspan="3"></th>
                 </tr>
             </thead>
-            <tr v-for="(word,i) in words" :key ="i">
-                <td>{{ word.english }}</td>
-                <td>{{ word.german }}</td>
-                <td>{{ word.vietnamese }}</td>
-                <td width="75" class="center aligned">
-                    <router-link :to="{name: 'show',params: {id: word._id}}">Show</router-link>
-                </td>
-                <td width="75" class="center aligned">
-                    <router-link :to="{name: 'edit',params: {id: word._id}}">Edit</router-link>
-                </td>
-                <td width="75" class="center aligned ">
-                    <button type="button" class="btn btn-danger"  @click.prevent="onDestroy(word._id)" href="`/words/${word._id}">Delete</button>
-                </td>
-
-            </tr>
+            <tbody>
+                <tr v-for="(word,i) in words" :key ="i">
+                    <td>{{ word.english }}</td>
+                    <td>{{ word.german }}</td>
+                    <td>{{ word.vietnamese }}</td>
+                    <td width="75" class="center aligned">
+                        <router-link :to="{name: 'show',params: {id: word._id}}">Show</router-link>
+                    </td>
+                    <td width="75" class="center aligned">
+                        <router-link :to="{name: 'edit',params: {id: word._id}}">Edit</router-link>
+                    </td>
+                    <td width="75" class="center aligned ">
+                        <button type="button" class="btn btn-danger"  @click.prevent="onDestroy(word._id)" href="`/words/${word._id}">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </template>
