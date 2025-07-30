@@ -39,7 +39,7 @@
                   :disabled="option.value === firstLanguage"
                 >
                 <i :class="option.flag"></i>
-                {{ option.name }} {{ option.value === firstLanguage ? '(already chosen)' : '' }}
+                {{ option.name }} {{ option.value === firstLanguage ? '(chosen)' : '' }}
                 </option>
               </select>
             </div>
