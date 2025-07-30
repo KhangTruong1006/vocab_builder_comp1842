@@ -74,4 +74,8 @@
  .error {
    color: red;
  }
+
+ .ui.label {
+    width: 10em;
+ }
  </style>
