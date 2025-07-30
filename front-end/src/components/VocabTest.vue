@@ -6,7 +6,7 @@
       <!-- First Language (readonly question) -->
       <div class="ui labeled input fluid">
         <div class="ui label">
-          <i :class="getFlagClass(firstLanguage)"></i>
+          <i :class="getFlag(firstLanguage)"></i>
           {{ capitalize(firstLanguage) }}
         </div>
         <input
@@ -20,7 +20,7 @@
       <!-- Second Language (user input) -->
       <div class="ui labeled input fluid">
         <div class="ui label">
-          <i :class="getFlagClass(secondLanguage)"></i>
+          <i :class="getFlag(secondLanguage)"></i>
           {{ capitalize(secondLanguage) }}
         </div>
         <input
@@ -34,14 +34,16 @@
 
       <div class="row pl-3">
         <button class="positive ui button" v-if="!testOver">
-        Submit
-      </button>
-      <a v-if="testOver" class="positive ui button" href="/words">
-        Finish
-      </a>
-      </div>
-      
-      
+          Submit
+        </button>
+        
+        <button v-if="testOver" class="positive ui button" @click="backToWords">
+          Finish
+        </button>
+        <button class="negative ui button ml-2" v-if="testOver" @click="restart">
+          Restart
+        </button>
+      </div> 
     </form>
 
     <p :class="['results', resultClass]">
@@ -123,7 +125,7 @@ export default {
       if (!word) return '';
       return word.charAt(0).toUpperCase() + word.slice(1);
     },
-    getFlagClass(lang) {
+    getFlag(lang) {
       const flags = {
         english: 'united kingdom flag',
         german: 'germany flag',
@@ -131,6 +133,14 @@ export default {
       };
       return flags[lang] || '';
     },
+
+    restart(){
+      this.$emit('restart-test')
+    },
+
+    backToWords(){
+      this.$router.push('/words')
+    }
   },
 };
 </script>
@@ -153,5 +163,8 @@ export default {
 }
 .ui.labeled.input {
   margin-bottom: 15px;
+}
+.ui.label{
+  width: 10em;
 }
 </style>
