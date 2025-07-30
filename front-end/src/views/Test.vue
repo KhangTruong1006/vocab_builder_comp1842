@@ -6,38 +6,40 @@
       <p>You need to enter at least five words to begin the test</p>
     </div>
     <div v-else>
-      <div v-if="!isStarted">
+      <div v-if="!isStarted" class="d-flex justify-content-center">
         <form @submit.prevent="onSubmit" class="shadow-lg">
           <h2 class="text-center">Select Language</h2>
           <div class="row">
             <div class="col">
-              <p class="bold text-center">First Language</p>
+              <p class="bold text-center text-muted">- First Language -</p>
               <select id="first_language" v-model="firstLanguage">
+                <button>
+                  <selectedcontent></selectedcontent>
+                </button>
                 <option
                   v-for="option in options"
                   :key="option.value"
                   :value="option.value"
                 >
-                  <i :class="option.flag">
-                    <span>
-                      {{ option.name }}
-                    </span>
-                  </i> 
+                  <i :class="option.flag"></i> 
+                  {{ option.name }}
                 </option>
               </select>
             </div>
             <div class="col">
-              <p class="bold text-center">Second Language</p>
+              <p class="bold text-center text-muted">- Second Language -</p>
               <select id="second_language" v-model="secondLanguage">
+                <button>
+                  <selectedcontent></selectedcontent>
+                </button>
                 <option
                   v-for="option in options"
                   :key="option.value"
                   :value="option.value"
                   :disabled="option.value === firstLanguage"
                 >
-                <i :class="option.flag">
-                    {{ option.name }} {{ option.value === firstLanguage ? '(already chosen)' : '' }}
-                </i>
+                <i :class="option.flag"></i>
+                {{ option.name }} {{ option.value === firstLanguage ? '(already chosen)' : '' }}
                 </option>
               </select>
             </div>
@@ -54,6 +56,7 @@
           :words="words"
           :first-language="firstLanguage"
           :second-language="secondLanguage"
+          @restart-test="restartTest"
         />
       </div>
     </div>
@@ -90,6 +93,9 @@ export default {
       }
       this.isStarted = true;
     },
+    restartTest(){
+      this.isStarted = false;
+    }
   },
   async mounted() {
     this.words = await api.getWords();
@@ -103,6 +109,7 @@ export default {
   }
 
   form {
+    width: 100%;
     border-width: 2.5px;
     border-radius: 5px;
     margin: 30px;
@@ -116,8 +123,9 @@ export default {
 
   select {
     width: 100%;
-    height: 35px;
+    height: 50%;
     border-radius: 5px;
+    font-size: 1.5rem;
   }
 
   option{
@@ -125,11 +133,12 @@ export default {
     gap: 1rem;
     align-items: center;
   }
-
+  
   option{
     padding-block: 1rem;
   }
   
+  option::before,
   option::checkmark{
     display: none;
   }
