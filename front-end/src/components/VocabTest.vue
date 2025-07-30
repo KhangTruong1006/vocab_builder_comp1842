@@ -37,10 +37,11 @@
           Submit
         </button>
         
-        <button v-if="testOver" class="positive ui button" @click="backToWords">
-          Finish
+        <button v-if="testOver" class="btn btn-primary w-25 col-3" @click="backToWords">
+          Homepage
         </button>
-        <button class="negative ui button" v-if="testOver" @click="restart">
+        <div class="col-1"></div>
+        <button class="btn btn-outline-danger w-25 col-3" v-if="testOver" @click="restart">
           Restart
         </button>
       </div> 
