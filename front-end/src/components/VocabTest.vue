@@ -32,15 +32,15 @@
         />
       </div>
 
-      <div class="row pl-3">
-        <button class="positive ui button" v-if="!testOver">
+      <div class="d-flex">
+        <button class="positive ui button " v-if="!testOver">
           Submit
         </button>
         
         <button v-if="testOver" class="positive ui button" @click="backToWords">
           Finish
         </button>
-        <button class="negative ui button ml-2" v-if="testOver" @click="restart">
+        <button class="negative ui button" v-if="testOver" @click="restart">
           Restart
         </button>
       </div> 
@@ -146,6 +146,9 @@ export default {
 </script>
 
 <style scoped>
+button{
+  width: 25%;
+}
 .results {
   margin: 25px auto;
   padding: 15px;

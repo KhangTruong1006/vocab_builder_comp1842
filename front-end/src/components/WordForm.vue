@@ -24,7 +24,7 @@
         </div>
         
         <div class="d-flex justify-content-center">
-            <button class="positive ui button">Save</button>
+            <button class="btn btn-success">Save</button>
         </div> 
     </form>
  </template>
@@ -65,6 +65,8 @@
  <style scoped>
  button{
     width: 50%;
+    height: 2em;
+    font-size: 20px;
  }
 
   form{
